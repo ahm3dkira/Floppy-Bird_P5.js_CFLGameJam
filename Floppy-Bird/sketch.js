@@ -1,6 +1,11 @@
 var bird;
 var pipes = [];
 var points = 0;
+var playerImage;
+
+function preload(){
+  playerImage = loadImage('flappy-bird-sprite.png');  
+}
 function setup() {
   createCanvas(400, 400);
   bird = new Bird();
@@ -9,7 +14,8 @@ function setup() {
 } // main setup
 
 function draw() {
-  background(0);
+  
+  background(3, 219, 252);
   
   if(frameCount%120==0){
     pipes.push(new Pipe());
@@ -32,6 +38,7 @@ function draw() {
 } // main draw
 
 function Bird(){
+  
   this.y = height/2;
   this.x =64;
   this.gravity=0.6;
@@ -39,8 +46,9 @@ function Bird(){
   this.velocity =0 ;
   
   this.show = ()=>{
-    fill(255);
-    ellipse(this.x,this.y,32,32);
+    image(playerImage,this.x,this.y,40,40)
+    // fill(255);
+    // ellipse(this.x,this.y,32,32);
     
   }
   this.up = ()=>{
@@ -51,8 +59,8 @@ function Bird(){
     this.velocity*=0.9;
     this.y+=this.velocity;
     
-    if(this.y > height) {
-      this.y = height;
+    if(this.y > height-25) {
+      this.y = height-25;
       this.velocity=0;
     }
     if(this.y < 0) {
